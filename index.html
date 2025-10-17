@@ -3,123 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Attachment Renderer</title>
-
-    <!-- Bootstrap 5 CSS for professional layout and responsiveness -->
+    <title>Markdown Viewer Application</title>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Highlight.js CSS Theme (Monokai) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
-
+    <!-- Highlight.js CSS (Atom One Dark theme) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <style>
         body {
-            background-color: #f4f7f9;
+            padding-top: 20px;
+            background-color: #f8f9fa;
         }
         .container {
-            padding-top: 20px;
-            padding-bottom: 40px;
+            max-width: 900px;
         }
-        #markdown-output {
-            background-color: #ffffff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            min-height: 300px;
-            /* Ensure rendered markdown elements are styled well */
+        .tab-content {
+            border: 1px solid #dee2e6;
+            border-top: none;
+            padding: 15px;
+            min-height: 500px;
+            background-color: #fff;
+            overflow-y: auto;
         }
-        #markdown-output pre {
-            border-radius: 6px;
-            padding: 1em;
+        /* Styling for the source view */
+        #markdown-source {
+            white-space: pre;
+            font-family: monospace;
             overflow-x: auto;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 4px;
+            margin: 0; /* Remove default pre margin */
         }
-        #markdown-output table {
+        /* Styling for rendered markdown elements */
+        #rendered-markdown table {
             width: 100%;
             margin-bottom: 1rem;
+            color: #212529;
             border-collapse: collapse;
         }
-        #markdown-output table th,
-        #markdown-output table td {
+        #rendered-markdown th, #rendered-markdown td {
             padding: 0.75rem;
+            vertical-align: top;
             border: 1px solid #dee2e6;
         }
-        #markdown-output table th {
+        #rendered-markdown th {
             background-color: #e9ecef;
-            text-align: left;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header class="text-center mb-5">
-            <h1 class="display-5 fw-bold text-primary">Markdown Attachment Viewer</h1>
-            <p class="lead text-muted">Renders <code>input.md</code> using marked.js and applies syntax highlighting via highlight.js.</p>
-        </header>
+        <h1 class="mb-4 text-center">Dynamic Markdown Renderer</h1>
 
-        <!-- Simulation of Professional README.md -->
-        <div class="card mb-4 border-0 shadow-sm">
-            <div class="card-header bg-dark text-white fw-bold">
-                README.md (Project Overview)
-            </div>
+        <!-- Professional README.md Content -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">README.md</div>
             <div class="card-body">
-                <p><strong>Application Name:</strong> Markdown Renderer Utility</p>
-                <p><strong>Description:</strong> This utility demonstrates a robust client-side solution for converting Markdown files to styled HTML. It utilizes industry-standard libraries <code>marked.js</code> for parsing and <code>highlight.js</code> for code block formatting.</p>
-                <p><strong>Status:</strong> Successfully loaded and rendered attachment content below.</p>
+                <p class="lead"><strong>Markdown Viewer Application</strong></p>
+                <p>This single-file HTML application dynamically renders Markdown content using <code>marked.js</code> and provides syntax highlighting for code blocks using <code>highlight.js</code>.</p>
+                <h6>Key Features:</h6>
+                <ul>
+                    <li><strong>Tabbed Interface:</strong> Easily switch between the fully rendered HTML output and the original Markdown source.</li>
+                    <li><strong>Dependencies:</strong> Utilizes Bootstrap 5 for responsive layout and tab functionality (loaded via CDN).</li>
+                    <li><strong>Self-Contained:</strong> All functionality works when opened directly in a browser.</li>
+                </ul>
             </div>
         </div>
 
-        <!-- Simulation of MIT License -->
-        <div class="card mb-4 border-0 shadow-sm">
-            <div class="card-header bg-secondary text-white fw-bold">
-                LICENSE (MIT)
+        <!-- MIT License Content -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-secondary text-white">Repo MIT License</div>
+            <div class="card-body small">
+                <p><strong>The MIT License (MIT)</strong></p>
+                <p>Copyright (c) 2024 Developer</p>
+                <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+                <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+                <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
             </div>
-            <div class="card-body bg-light">
-                <pre style="white-space: pre-wrap; font-size: 0.75rem; margin: 0;">
-MIT License
+        </div>
 
-Copyright (c) 2024 Markdown Renderer Utility
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs" id="viewTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="rendered-tab" data-bs-toggle="tab" data-bs-target="#rendered-pane" type="button" role="tab" aria-controls="rendered-pane" aria-selected="true">Rendered HTML View</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="source-tab" data-bs-toggle="tab" data-bs-target="#source-pane" type="button" role="tab" aria-controls="source-pane" aria-selected="false">Original Markdown Source</button>
+            </li>
+        </ul>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+        <!-- Tab Content -->
+        <div class="tab-content shadow-sm" id="viewTabsContent">
+            
+            <!-- Rendered View Pane -->
+            <div class="tab-pane fade show active" id="rendered-pane" role="tabpanel" aria-labelledby="rendered-tab">
+                <div id="rendered-markdown">
+                    <!-- Content injected by JavaScript -->
+                    <div class="text-center p-5 text-muted">Rendering content...</div>
+                </div>
+            </div>
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+            <!-- Markdown Source Pane -->
+            <div class="tab-pane fade" id="source-pane" role="tabpanel" aria-labelledby="source-tab">
+                <pre id="markdown-source">
+                    <!-- Source injected by JavaScript -->
+                    Loading source...
                 </pre>
             </div>
         </div>
 
-        <h2 class="mb-3">Attachment Content: <span class="text-muted fs-5">input.md</span></h2>
-
-        <!-- Markdown Output Area -->
-        <div id="markdown-output" class="border">
-            <p class="text-center text-muted mt-5">Initializing converter...</p>
-        </div>
-
     </div>
 
-    <!-- Marked.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- Highlight.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <!-- Bootstrap JS Bundle (optional, but completes the framework) -->
+    <!-- External Libraries -->
+    <!-- Bootstrap 5 JS (required for tabs) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Marked.js (Markdown Renderer) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Highlight.js (Syntax Highlighter) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Highlight.js Language support (JavaScript is needed for the sample) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const markdownContent = `
-# Sample Document
+        const MARKDOWN_SOURCE = `# Sample Document
 
 This is a **test markdown** file with:
 
@@ -131,51 +138,64 @@ This is a **test markdown** file with:
 
 \`\`\`javascript
 console.log("Hello World!");
-
-function calculate(a, b) {
-    // This is a comment
-    return a + b;
-}
 \`\`\`
 
 ## Table
 
-| Name | Age | Location |
-|------|------|----------|
-| Alice | 30 | New York |
-| Bob | 25 | London |
-| Charlie | 45 | Paris |
+| Name | Age |
+|------|------|
+| Alice | 30 |
+| Bob | 25 |
 `;
 
-            const outputElement = document.getElementById('markdown-output');
+        /**
+         * Renders the Markdown source into HTML and applies syntax highlighting.
+         */
+        function renderMarkdown() {
+            const renderedOutput = document.getElementById('rendered-markdown');
+            const sourceOutput = document.getElementById('markdown-source');
 
-            // Basic check for library loading
-            if (typeof marked === 'undefined') {
-                outputElement.innerHTML = '<div class="alert alert-danger">Error: marked.js failed to load. Cannot convert Markdown.</div>';
-                return;
-            }
-            if (typeof hljs === 'undefined') {
-                outputElement.innerHTML = '<div class="alert alert-warning">Warning: highlight.js failed to load. Markdown converted, but code blocks will not be styled.</div>';
-            }
+            // 1. Set up the custom renderer for marked.js
+            const renderer = new marked.Renderer();
+            
+            // Override code block rendering to use highlight.js
+            renderer.code = (code, language) => {
+                try {
+                    const validLang = hljs.getLanguage(language) ? language : 'plaintext';
+                    // Highlight the code
+                    const highlighted = hljs.highlight(code, { language: validLang }).value;
+                    // Return the highlighted code wrapped in pre/code tags
+                    return `<pre><code class="hljs language-${validLang}">${highlighted}</code></pre>`;
+                } catch (e) {
+                    console.error("Highlighting error:", e);
+                    // Fallback if highlighting fails
+                    return `<pre><code>${code}</code></pre>`;
+                }
+            };
+
+            marked.setOptions({
+                renderer: renderer,
+                gfm: true, // Enable GitHub Flavored Markdown
+                breaks: true,
+                sanitize: false,
+            });
 
             try {
-                // 1. Convert Markdown to HTML
-                // marked.js handles the conversion, generating standard HTML including <pre><code class="language-xxx">
-                const htmlOutput = marked.parse(markdownContent);
+                // 2. Render HTML content
+                const htmlContent = marked.parse(MARKDOWN_SOURCE);
+                renderedOutput.innerHTML = htmlContent;
 
-                // 2. Insert the HTML into the designated element
-                outputElement.innerHTML = htmlOutput;
+                // 3. Display Source content in the required element ID
+                sourceOutput.textContent = MARKDOWN_SOURCE;
 
-                // 3. Apply Syntax Highlighting if hljs is available
-                if (typeof hljs !== 'undefined') {
-                    hljs.highlightAll();
-                }
-
-            } catch (error) {
-                console.error("Markdown conversion failed:", error);
-                outputElement.innerHTML = \`<div class="alert alert-danger">An internal error occurred during conversion: \${error.message}</div>\`;
+            } catch (e) {
+                console.error("Fatal Error during Markdown processing:", e);
+                renderedOutput.innerHTML = '<div class="alert alert-danger">An error occurred while rendering the markdown content. Please check the console.</div>';
             }
-        });
+        }
+
+        // Initialize the application once the DOM is ready
+        document.addEventListener('DOMContentLoaded', renderMarkdown);
     </script>
 </body>
 </html>
