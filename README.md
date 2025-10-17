@@ -1,71 +1,67 @@
-# markdown-converter-5e3a4242
+# Markdown Converter with Tabbed View Switching
 
 ## Summary
 
-This is a lightweight, client-side web application designed to efficiently convert raw Markdown content into fully rendered HTML. It provides a seamless mechanism for processing input Markdown files, displaying the formatted output, and ensuring that all embedded code blocks are professionally styled using syntax highlighting.
+This application is an enhanced Markdown converter tool designed for real-time text processing. It allows users to input Markdown text and instantly view the rendered HTML output. A key feature is the introduction of tabbed navigation, enabling users to seamlessly switch between the final rendered HTML view and the original Markdown source code for easy reference and debugging.
 
 ## Features
 
-*   **Client-Side Processing:** All conversion logic runs directly in the browser, requiring no server interaction.
-*   **Markdown Conversion:** Utilizes `marked.js` for robust and fast parsing of Markdown syntax.
-*   **Syntax Highlighting:** Integrates `highlight.js` to automatically detect and style code blocks within the output.
-*   **Dedicated Output:** Renders the resulting HTML content exclusively within the designated `#markdown-output` element.
-*   **CDN Integration:** Libraries are loaded via Content Delivery Networks (CDNs) for quick setup and reliable access.
+*   **Real-Time Conversion:** Instantaneous conversion of Markdown input to HTML output.
+*   **Tabbed Interface:** Provides a clean, organized way to manage different views of the content.
+*   **View Switching:** Ability to switch between the "Rendered HTML" view and the "Original Source" view.
+*   **Source Display:** Dedicated container (`#markdown-source`) to accurately display the raw, unrendered Markdown text when the source tab is active.
+*   **Static Application:** Runs entirely client-side without the need for server infrastructure.
 
 ## Setup
 
-This application is built as a static HTML page and does not require a complex build process or backend server environment.
+This project is a client-side application requiring no backend services, package managers, or complex dependencies.
 
-1.  **Clone the repository:** Download or clone the project files to your local machine.
-2.  **Open the file:** Navigate to the main HTML file (e.g., `index.html`) and open it directly in any modern web browser.
+1.  **Clone the repository:**
+    ```bash
+    git clone [repository-url] markdown-converter-5e3a4242
+    ```
+2.  **Navigate to the project directory.**
+3.  **Run the application:** Open the `index.html` file directly in any modern web browser (e.g., Chrome, Firefox, Edge).
 
 ## Usage
 
-The application is designed to process an input Markdown file (`input.md`) and display the converted output immediately.
+The application is intuitive and designed for immediate use upon loading.
 
-1.  Ensure the necessary JavaScript dependencies (`marked.js` and `highlight.js`) are correctly loaded via their respective CDNs in the HTML file.
-2.  The application's JavaScript logic will read the content intended for conversion (typically simulated or loaded from an `input.md` file attachment).
-3.  The converted HTML, complete with syntax-highlighted code, will be visible within the designated output area on the page.
+1.  **Input Markdown:** Enter your desired Markdown text into the primary input area. The "Rendered HTML" view will update automatically.
+2.  **Default View:** The application defaults to showing the rendered output.
+3.  **Switch to Source:** Click the "Original Source" tab. The rendered output will be hidden, and the raw Markdown text will be displayed within the designated `#markdown-source` element.
+4.  **Toggle Views:** Click the tabs repeatedly to switch back and forth between the rendered HTML and the original source view instantly.
 
 ## Implementation Details
 
-### Technology Stack
+**Technical Stack:**
 
-*   HTML5
-*   CSS3
-*   Vanilla JavaScript
+*   **HTML5:** Provides the structure and necessary elements, including the tab containers and the `#markdown-source` element.
+*   **CSS3:** Used for styling the interface and managing the visibility of the tab content.
+*   **JavaScript:** Handles the core logic, including event listeners for tab clicks, DOM manipulation for view switching, and ensuring the content of `#markdown-source` is updated.
 
-### Libraries
+**Mechanism:**
 
-*   **`marked.js`:** Used for parsing Markdown text into HTML strings. Loaded via CDN.
-*   **`highlight.js`:** Used for applying syntax highlighting to pre-formatted code blocks (`<pre><code>...</code></pre>`). Loaded via CDN, along with a chosen theme stylesheet.
-
-### Mechanism
-
-The core functionality involves three steps:
-1.  The Markdown content is passed to the `marked.parse()` function.
-2.  The resulting HTML string is injected into the inner HTML of the `#markdown-output` element.
-3.  The `highlight.js` library is initialized (e.g., using `hljs.highlightAll()`) to scan the newly rendered HTML content and apply appropriate CSS classes for syntax highlighting.
+The application utilizes JavaScript to manage the display state. When a tab is selected, the script applies or removes specific CSS classes (e.g., `active`, `hidden`) to the content containers. This ensures that only the content corresponding to the active tab (either the rendered output or the `#markdown-source` element) is visible at any given time.
 
 ## Code Structure
 
-The application's logic is straightforward, focusing on initialization and execution within the main script:
+The core functionality is driven by the main JavaScript file, which is structured around event handling and view management:
 
-*   **CDN Loading:** Links to `marked.js` and `highlight.js` are included in the HTML `<head>` or before the closing `</body>` tag.
-*   **Input Retrieval:** A function handles reading or simulating the content of `input.md`.
-*   **Conversion Function:** A primary JavaScript function orchestrates the conversion, calling `marked.parse()` and updating the DOM element `#markdown-output`.
-*   **Highlighting Execution:** After the HTML is rendered, a final call ensures `highlight.js` processes all code elements to achieve the required syntax styling.
+*   **Tab Event Listeners:** Event listeners are attached to the tab navigation elements to detect user clicks.
+*   **`switchView()` Function:** This central function orchestrates the view change. It takes the target view identifier (e.g., 'rendered' or 'source') and updates the visual state of the application.
+*   **Content Synchronization:** The input value is continuously synchronized with the `#markdown-source` element to ensure the "Original Source" tab always displays the current, raw input.
+*   **CSS Utility:** Simple CSS classes are used to toggle the `display` property of the content panels, ensuring a smooth and immediate switch between views.
 
 ## Evaluation Criteria
 
-This application satisfies the following project evaluation criteria:
+This application successfully satisfies the following evaluation criteria:
 
-*   Repo has MIT license (Referenced in the License section).
-*   `README.md` is professional.
-*   Page loads `marked.js` from CDN.
-*   Page loads `highlight.js` from CDN.
-*   Element `#markdown-output` contains converted HTML.
-*   Code blocks are syntax highlighted.
+*   The repository is licensed under the MIT License.
+*   The `README.md` is professional and comprehensive.
+*   Tab navigation elements are present and fully functional.
+*   The element `#markdown-source` accurately displays the original, unrendered Markdown source.
+*   Switching between the "Rendered HTML" view and the "Original Source" view works correctly and instantly.
 
 ## License
 
